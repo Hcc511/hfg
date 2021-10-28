@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+	</head>
+	<body>
+		
+		<script src="js/pixi.min.js"></script>
+		<script>
+		var  app = new PIXI.Application(380,510);
+		document.body.appendChild(app.view);
+		
+		var bg = new PIXI.Sprite.fromImage("res/start.jpg");
+		app.stage.addChild(bg);
+
+		var sg = new PIXI.Sprite.fromImage("res/st.png");
+		app.stage.addChild(sg);
+		var text = new PIXI.Text("");
+		var s  = new PIXI.Text("");
+		
+		
+		var dl = new Array();
+		var bj1 = new PIXI.Sprite.fromImage("res/bj.jpg");
+		var bj2 = new PIXI.Sprite.fromImage("res/bj2.jpg");
+		var role  = new PIXI.Sprite.fromImage("res/role.png");
+		var hj = new PIXI.Sprite.fromImage("res/hj.gif");
+		var hj1 = new PIXI.Sprite.fromImage("res/hj.gif");
+		var hj2 = new PIXI.Sprite.fromImage("res/hj.gif");
+		var hj3 = new PIXI.Sprite.fromImage("res/hj.gif");
+		var gz = new PIXI.Sprite.fromImage("res/gz.png");
+		dl[0] = new PIXI.Sprite.fromImage("res/dl.png");
+		dl[1] = new PIXI.Sprite.fromImage("res/dl.png");
+		dl[2] = new PIXI.Sprite.fromImage("res/dl.png");
+		dl[3] = new PIXI.Sprite.fromImage("res/dl.png");
+		dl[4] = new PIXI.Sprite.fromImage("res/dl.png");
+		dl[5] = new PIXI.Sprite.fromImage("res/dl.png");
+		var jx = new PIXI.Sprite.fromImage("res/jx.png");
+		
+		
+		
+		
+		dl[0].anchor.set(0.5,0.5);
+		dl[0].scale.x=0.5,
+		dl[0].scale.y=0.5;
+		dl[0].x=390;
+		dl[0].y=360;
+		
+		dl[1].anchor.set(0.5,0.5);
+		dl[1].scale.x=0.7,
+		dl[1].scale.y=0.7;
+		dl[1].x=20;
+		dl[1].y=160;
+		
+		dl[2].anchor.set(0.5,0.5);
+		dl[2].scale.x=0.3,
+		dl[2].scale.y=0.3;
+		dl[2].x=320;
+		dl[2].y=160;
+		
+		
+		dl[3].anchor.set(0.5,0.5);
+		dl[3].scale.x=0.8,
+		dl[3].scale.y=0.8;
+		dl[3].x=230;
+		dl[3].y=320;
+		
+		
+		dl[4].anchor.set(0.5,0.5);
+		dl[4].scale.x=0.7,
+		dl[4].scale.y=0.7;
+		dl[4].x=130;
+		dl[4].y=290;
+		
+		
+		
+		dl[5].anchor.set(0.5,0.5);
+		dl[5].scale.x=1,
+		dl[5].scale.y=1;
+		dl[5].x=130;
+		dl[5].y=360;
+		
+		
+		gz.anchor.set(0.5,0.5);
+		gz.scale.x=0.5;
+		gz.scale.y=0.5;
+		
+		gz.y=30;
+		
+		
+		
+		hj.anchor.set(0.5,0.5);
+		hj.x=50;
+		hj.y=483;
+		hj.scale.x=0.6;
+		hj.scale.y=0.6;
+		
+		hj1.anchor.set(0.5,0.5);
+		hj1.x=260;
+		hj1.y=436;
+		hj1.scale.x=0.6;
+		hj1.scale.y=0.6;
+		
+		hj2.anchor.set(0.5,0.5);
+		hj2.x=290;
+		hj2.y=330;
+		hj2.scale.x=0.6;
+		hj2.scale.y=0.6;
+		
+		hj3.anchor.set(0.5,0.5);
+		hj3.x=190;
+		hj3.y=270;
+		hj3.scale.x=0.6;
+		hj3.scale.y=0.6;
+		
+		
+		
+		role.anchor.set(0.5,0.5);
+		role.x=30;
+		role.y=65;
+		
+		
+		sg.anchor.set(0.5,0.5);
+		sg.x=200;
+		sg.y=420;
+		
+		
+		text.x=80;
+		text.y=180;
+		
+		//变量区
+		var s = 0;
+		var speed=1;
+		var switchs = false;
+		var zf = 0;
+		
+
+		
+		
+		sg.interactive = true;
+		sg.on("click",sgame);
+		function sgame()
+		{
+			sg.x=-300;
+			sg.y=-300;
+			game();
+
+		}
+		
+		function game()
+		{
+			
+			app.stage.addChild(bj1);
+			app.stage.addChild(bj2);
+			bj2.addChild(role);
+			app.stage.addChild(hj);
+			app.stage.addChild(hj1);
+			app.stage.addChild(hj2);
+			app.stage.addChild(hj3);
+			role.addChild(gz);
+			app.stage.addChild(dl[0]);
+			app.stage.addChild(dl[1]);
+			app.stage.addChild(dl[2]);
+			app.stage.addChild(dl[3]);
+			app.stage.addChild(dl[4]);
+			app.stage.addChild(dl[5]);
+			
+			action();
+		}
+		
+		
+		app.ticker.add(move);
+		function move()
+		{
+			role.x+=speed;
+			if(role.x>380)
+			{
+				speed=-speed;
+			}
+			if(role.x<0)
+			{
+				speed=-speed;
+			}
+			
+			if(text.y>-50)text.y-=1;
+			
+			if(zf===100)
+			{
+				text = new PIXI.Text("KO",{fontSize:80,fontWeight:"bold"});
+				app.stage.addChild(text);
+				text.x=150;
+				text.y=180;
+				gz.y=501;
+			}
+			
+			if(hj.y-gz.y<=3 && hj.y-gz.y>=0)
+			{
+				//lert("位置y："+hj.y+"--"+gz.y+"   car.x:"+role.x+"  gold.x:"+hj.x);
+				if((role.x-hj.x<=20 && role.x-hj.x>=0)  || (hj.x-role.x<=20 && hj.x-role.x>=0))
+				{
+					//alert("位置x："+hj.x+"--"+role.x);
+					text.visible=true;
+					hj.x=hj.y=-10;
+					gz.y=501;
+					text = new PIXI.Text("发财了  +25！");
+					app.stage.addChild(text);
+					text.x=80;
+					text.y=180;
+					gz.y=501;
+					zf+=25;
+				}
+			}
+			
+			if(hj1.y-gz.y<=3 && hj1.y-gz.y>=0)
+			{
+				//alert("位置y："+hj1.y+"--"+gz.y+"   car.x:"+role.x+"  gold.x:"+hj1.x);
+				if((role.x-hj1.x<=20 && role.x-hj1.x>=0)  || (hj1.x-role.x<=20 && hj1.x-role.x>=0))
+				{
+					//alert("位置x："+hj1.x+"--"+role.x);
+					text.visible=true;
+					hj1.x=hj1.y=-10;
+					gz.y=501;
+					text = new PIXI.Text("发财了  +25！");
+					app.stage.addChild(text);
+					text.x=80;
+					text.y=180;
+					gz.y=501;
+					zf+=25;
+				}
+			}
+			
+			
+			if(hj2.y-gz.y<=3 && hj2.y-gz.y>=0)
+			{
+				//alert("位置y："+hj1.y+"--"+gz.y+"   car.x:"+role.x+"  gold.x:"+hj1.x);
+				if((role.x-hj2.x<=20 && role.x-hj2.x>=0)  || (hj2.x-role.x<=20 && hj2.x-role.x>=0))
+				{
+					//alert("位置x："+hj1.x+"--"+role.x);
+					text.visible=true;
+					hj2.x=hj2.y=-10;
+					gz.y=501;
+					text = new PIXI.Text("发财了  +25！");
+					app.stage.addChild(text);
+					text.x=80;
+					text.y=180;
+					gz.y=501;
+					zf+=25;
+				}
+			}
+			if(hj3.y-gz.y<=3 && hj3.y-gz.y>=0)
+			{
+				//alert("位置y："+hj1.y+"--"+gz.y+"   car.x:"+role.x+"  gold.x:"+hj1.x);
+				if((role.x-hj3.x<=20 && role.x-hj3.x>=0)  || (hj3.x-role.x<=20 && hj3.x-role.x>=0))
+				{
+					//alert("位置x："+hj1.x+"--"+role.x);
+					text.visible=true;
+					hj3.x=hj3.y=-10;
+					gz.y=501;
+					text = new PIXI.Text("发财了  +25！");
+					app.stage.addChild(text);
+					text.x=80;
+					text.y=180;
+					gz.y=501;
+					zf+=25;
+				}
+			}
+			
+			pd();
+			
+		}
+		
+		
+		
+		function action()
+		{
+			bj1.interactive=true;
+			bj1.on("click",take1);	
+		}
+		function take1()
+		{	
+			speed=0;
+			s=1;
+		}
+		app.ticker.add(take2);
+		function take2()
+		{
+			gz.y+=s;
+			if(gz.y>500)
+			{
+				gz.y=30;
+				gz.visible=true;
+				s=0;
+				speed=1;
+			}
+		}
+		
+		function pd()
+		{
+			
+			
+			for(var i =0;i<5;i++)
+			{
+				if(dl[i].y-gz.y<=3 && dl[i].y-gz.y>=0)
+				{
+					//alert("位置y："+hj1.y+"--"+gz.y+"   car.x:"+role.x+"  gold.x:"+hj1.x);
+					if((role.x-dl[i].x<=20 && role.x-dl[i].x>=0)  || (dl[i].x-role.x<=20 && dl[i].x-role.x>=0))
+					{
+						//alert("位置x："+hj1.x+"--"+role.x);
+						jx.visible=true;
+						text = new PIXI.Text("游戏结束，你失败了！");
+						app.stage.addChild(jx);
+						jx.x=130;
+						jx.y=200;
+						
+						
+						gz.y=30;
+						speed=0;
+						
+						
+						
+						
+						
+						app.stage.addChild(text);
+						text.x=80;
+						text.y=180;
+						gz.y=501;
+					}
+				}
+			}
+		}
+		
+		jx.interactive=true;
+		jx.on("click",jx1);
+		function jx1()
+		{
+			jx.visible=false;
+		}
+		
+		
+		
+		
+		</script>
+		
+		
+	</body>
+</html>
